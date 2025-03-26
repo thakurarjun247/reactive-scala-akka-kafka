@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException
 
 object SGN extends App {
   print("SGN")
@@ -225,6 +226,70 @@ object SGN extends App {
 
   println(higherOrder(10, 2, higherOrderFactory("mul")))
 
+  //class and trait start their body with :
+  //functions, lambdas and methods start their body with =
+  // : is used for defining types and their relationships.
+  //= is used for defining computations and expressions.
+
+  class Mountain(val height:Int, val isSnowCapped:Boolean):
+    override def toString: String = s"$height $isSnowCapped"
+    def grow() = height+1
+
+  val theShivalik = new Mountain(2000, true)
+  println(theShivalik)
+  println(theShivalik.grow())
+
+  //todo: inheritence
+  trait Adder:
+    def thisIsLikeAbastractMethod(x:Int, y:Int):Int
+    def thisIsLikeADefaultMethod(x:Int, y:Int)=x*y
+
+    val lambda = (x:Int, y:Int)=>x-y
+
+
+  class MyCalculation extends Adder:
+    override def thisIsLikeAbastractMethod(x: Int, y: Int): Int = x+y
+
+  val myCalculation= new MyCalculation()
+  println(myCalculation.thisIsLikeADefaultMethod(2,3)) //6
+  println(myCalculation.thisIsLikeAbastractMethod(10,5)) //15
+  println(myCalculation.lambda(2,3)) //-1
+
+  //for loop is for do loop now, f*** use arrow
+  for i <- a
+    do
+       println( a (i))
+
+  for i<- 0 to a.length-1
+    do
+      println(Math.sqrt(a(i)))
+
+  //for yield
+//  val squreRoots=
+//  for
+//    (i <- 1 to 5)
+//  yield
+//    Math.sqrt(i)
+//gives a vector
+
+
+  println(s"squreroots: $squreRoots")
+
+  def writeToFile(xType:Int):String=
+    xType match
+      case 1=> throw new FileNotFoundException("FNF")
+      case 2=> throw new NoSuchMethodError("NSM")
+      case _=> "written successfully"
+
+  val fnfTrial=try writeToFile(3)
+  catch
+    case obj:FileNotFoundException => "file not found"
+    case obj:NoSuchMethodError => "no such method error"
+  finally
+   println("yeh toh hona hi tha")
+
+
+  println(fnfTrial)
 
 }
 
